@@ -8,8 +8,6 @@ use App\Http\Controllers\Api\EmpresaController;
 use App\Http\Controllers\Api\DesignController;
 
 
-Route::post("/login", [UserController::class,"login"]);
-Route::post("/register", [UserController::class,"register"]);
 
 Route::get('/empresa', [EmpresaController::class,'get']);
 Route::get('/empresa/{id}', [EmpresaController::class,'getAll']);
@@ -17,9 +15,9 @@ Route::post('/empresa', [EmpresaController::class,'create']);
 Route::patch('/empresa/{id}', [EmpresaController::class,'update']);
 Route::delete('/empresa/{id}', [EmpresaController::class,'delete']);
 
-Route::get('/user', [UserController::class,'get']);
-Route::get('/user/{id}', [UserController::class,'getAll']);
-Route::post('/user', [UserController::class,'create']);
+Route::get('/user', [UserController::class,'getAll']);
+Route::post("/login", [UserController::class,"login"]);
+Route::post("/register", [UserController::class,"register"]);
 Route::patch('/user/{id}', [UserController::class,'update']);
 Route::delete('/user/{id}', [UserController::class,'delete']);
 
