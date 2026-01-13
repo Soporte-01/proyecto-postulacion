@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
-{   
+{
     public function login(Request $request){
         $user=$request->name;
         $password = $request->password;
@@ -39,8 +39,10 @@ class UserController extends Controller
     }
     public function register(Request $request){
         $validator= validator::make($request->all(), [
-            "name"=> "required",
-            "password"=> "required"
+            "name"=> "required|min:2",
+            "password"=> "",
+            "email"=> "required|email|unique:user,email",
+            "foto"=> "nullable|image|max:2048",
             ]);
             if ($validator->fails()){
                 $data=[
@@ -98,7 +100,7 @@ class UserController extends Controller
         $user = UserModel::find($request->id);
         if (!$user) {
             return response()->json([
-                
+
                 "mensaje" => "Usuario no encontrado",
                 "status" => 404
             ], 404);
@@ -107,7 +109,9 @@ class UserController extends Controller
         // Validar datos
         $validator = Validator::make($request->all(), [
             "name" => "required|min:2",
-            "password" => "required|min:5"
+            "password" => "",
+            "email" => "required|email|unique:user,email",
+            "foto" => "nullable|image|max:2048"
         ]);
 
         if ($validator->fails()) {
