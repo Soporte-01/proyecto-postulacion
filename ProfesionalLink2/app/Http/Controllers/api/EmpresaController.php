@@ -32,11 +32,11 @@ class EmpresaController extends Controller
         return response()->json($empresa,200);
     }
     public function create(Request $request){
-        $validator= validator::make($request->all(), [
+        $validator= Validator::make($request->all(), [
             "nombre"=> "required|min:2",
             "logo"=> "",
-            "email"=> "required|email|unique:user,email",
-            "sitio_web"=> "required|min:7",
+            "email"=> "required|email|unique:empresa,email",
+            "sitio_web"=> "",
             ]);
             if ($validator->fails()){
                 $data=[
@@ -62,9 +62,10 @@ class EmpresaController extends Controller
             $data=[
                 "mensaje"=>"empresa creada",
                 "empresa"=>$empresa,
+                // "empresa"=>$request->all(),
                 "status"=>201
             ];
-            return response()->json($data,201);
+        return response()->json($data,201);
     }
     public function update(Request $request){
         $empresa = EmpresaModel::find($request->id);

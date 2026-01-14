@@ -40,9 +40,10 @@ class UserController extends Controller
     public function register(Request $request){
         $validator= validator::make($request->all(), [
             "name"=> "required|min:2",
-            "password"=> "",
+            "password"=> "required",
             "email"=> "required|email|unique:user,email",
-            "foto"=> "nullable|image|max:2048",
+            "foto"=> "nullable|max:2048",
+            "design_id"=> "nullable",
             ]);
             if ($validator->fails()){
                 $data=[
@@ -54,14 +55,17 @@ class UserController extends Controller
             };
             $user=UserModel::create([
                 "name"=> $request->name,
-                "password"=> hash::make($request->password)
+                "password"=> hash::make($request->password),
+                "email"=> $request->email,
+                "foto"=> $request->foto,
+                "design_id"=> $request->design_id?? null,
             ]);
             if (!$user){
                 $data=[
                     "mensaje"=>"error",
                     "status"=>500
                 ];
-                return response()->json($data);
+                return response()->json($data,500);
             }
             $data=[
                 "user"=>$user,
@@ -111,7 +115,8 @@ class UserController extends Controller
             "name" => "required|min:2",
             "password" => "",
             "email" => "required|email|unique:user,email",
-            "foto" => "nullable|image|max:2048"
+            "foto" => "nullable",
+            "design_id" => "nullable",
         ]);
 
         if ($validator->fails()) {
@@ -125,6 +130,9 @@ class UserController extends Controller
         // Actualizar datos
         $user->name = $request->name;
         $user->password = Hash::make($request->password); // hash de contraseña
+        $user->email = $request->email;
+        $user->foto = $request->foto;
+        $user->design_id = $request->design_id;
         $user->save();
 
         return response()->json([

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DesignModel;
 
 class UserModel extends Model
 {
@@ -12,6 +13,14 @@ class UserModel extends Model
         'name',
         'password',
         'email',
-        'foto'
+        'foto',
+        'design_id',
     ];
+    protected $hidden = [
+        'password',
+    ];
+    public function design()
+    {
+        return $this->belongsTo(DesignModel::class);
+    }
 }

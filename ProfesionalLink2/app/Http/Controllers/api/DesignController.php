@@ -35,11 +35,11 @@ class DesignController extends Controller
     public function create(Request $request){
         $validator= validator::make($request->all(), [
             "puesto"=> "required|min:2",
-            "color1"=> "min:5",
-            "color2"=> "min:5",
+            "color1"=> "min:2",
+            "color2"=> "min:2",
             "link1"=> "min:5",
-            "link2"=> "min:5",
-            "link3"=> "min:5",
+            "link2"=> "",
+            "link3"=> "",
             ]);
             if ($validator->fails()){
                 $data=[
@@ -78,11 +78,11 @@ class DesignController extends Controller
 
         $validator = Validator::make($request->all(), [
             "puesto"=> "required|min:2",
-            "color1"=> "min:5",
-            "color2"=> "min:5",
+            "color1"=> "min:2",
+            "color2"=> "min:2",
             "link1"=> "min:5",
-            "link2"=> "min:5",
-            "link3"=> "min:5",
+            "link2"=> "",
+            "link3"=> "",
         ]);
 
         if ($validator->fails()) {
