@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('password',255);
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('foto')->nullable();
             $table->foreignId('design_id')->nullable()->constrained('design');
             $table->timestamps();
