@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('user', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('password');
+            $table->string('password',255);
+            $table->string('email')->nullable();
+            $table->string('foto')->nullable();
+            $table->foreignId('design_id')->nullable()->constrained('design');
             $table->timestamps();
         });
     }

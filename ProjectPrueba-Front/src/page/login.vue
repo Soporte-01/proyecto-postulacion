@@ -1,6 +1,6 @@
 <script setup>
     import BotomValidar from '../components/BotomValidar.vue'
-    import Validador from '../Validador.json'
+    // import Validador from '../Validador.json'
     import { ref } from 'vue'
     import { useRouter } from 'vue-router'
     
@@ -10,12 +10,13 @@
 
     const router = useRouter()
 
-    const loginExitoso = (usuario) => {
+    const loginExitoso = (usuario, id) => {
     // Guardamos sesión (muy simple)
     localStorage.setItem('auth', 'true')
     localStorage.setItem('usuario', usuario)
+    localStorage.setItem('id', id)
 
-    router.push('/bienvenida')
+    router.push('/home')
     }
 </script>
 
@@ -33,8 +34,8 @@
             <label for="mostrar">Mostrar Contraseña</label>
         </div>
         
+        <!-- :usuarios="Validador" -->
         <BotomValidar
-        :usuarios="Validador"
         :user-input="userInput"
         :password-input="passwordInput"
         @login-exitoso="loginExitoso"

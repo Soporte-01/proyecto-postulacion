@@ -1,25 +1,34 @@
     <script setup>
     import { defineProps, defineEmits } from 'vue'
+    import axios from 'axios'
 
     const props = defineProps({
-    usuarios: Array,        // Array de usuarios del JSON
+    // usuarios: Array,        // Array de usuarios del JSON
     userInput: String,      // Input del usuario
     passwordInput: String   // Input de la contraseña
     })
 
     const emit = defineEmits(['login-exitoso'])
 
-    function validar() {
-    // Buscar un usuario que coincida con el input
-    const usuarioValido = props.usuarios.find(
-        u => u.user === props.userInput && u.password === props.passwordInput
-    )
-    
-    if (usuarioValido) {
-        emit('login-exitoso', usuarioValido.user)// enviamos el nombre al padre
-    } else {
-        alert("Usuario o contraseña incorrecta")
-    }
+    async function validar() {
+        try {
+            const respuesta = await axios.post('http://127.0.0.1:8000/api/login',
+            {
+                name: props.userInput,
+                password: props.passwordInput
+            })
+            if (respuesta.data.success) {
+                alert("Usuario o contraseña incorrectos")
+            } else {
+                emit('login-exitoso', props.userInput, respuesta.data.user.id)
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+            alert('Usuario o contraseña incorrectos')
+            } else {
+            alert('Error del servidor')
+            }
+        }
     }
     </script>
 

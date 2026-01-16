@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('design', function (Blueprint $table) {
             $table->id();
+            $table->string('puesto');
+            $table->string('color1');
+            $table->string('color2');
+            $table->string('link1')->nullable();
+            $table->string('link2')->nullable();
+            $table->string('link3')->nullable();
             $table->timestamps();
         });
     }

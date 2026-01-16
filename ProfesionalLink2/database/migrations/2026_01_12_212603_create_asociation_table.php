@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('asociation', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('user')->onDelete('no action');
+            $table->foreignId('empresa_id')->constrained('empresa')->onDelete('no action');
             $table->timestamps();
         });
     }

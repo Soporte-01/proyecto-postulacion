@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
-{   
+{
     public function login(Request $request){
         $user=$request->name;
         $password = $request->password;
@@ -39,8 +39,11 @@ class UserController extends Controller
     }
     public function register(Request $request){
         $validator= validator::make($request->all(), [
-            "name"=> "required",
-            "password"=> "required"
+            "name"=> "required|min:2|unique:user,name",
+            "password"=> "required",
+            "email"=> "required|email|unique:user,email",
+            "foto"=> "nullable|max:2048",
+            "design_id"=> "nullable",
             ]);
             if ($validator->fails()){
                 $data=[
@@ -52,18 +55,21 @@ class UserController extends Controller
             };
             $user=UserModel::create([
                 "name"=> $request->name,
-                "password"=> hash::make($request->password)
+                "password"=> hash::make($request->password),
+                "email"=> $request->email,
+                "foto"=> $request->foto,
+                "design_id"=> $request->design_id?? null,
             ]);
             if (!$user){
                 $data=[
                     "mensaje"=>"error",
                     "status"=>500
                 ];
-                return response()->json($data);
+                return response()->json($data,500);
             }
             $data=[
                 "user"=>$user,
-                "status"=>200
+                "status"=>201
                 ];
             return response()->json($data,201);
 
@@ -98,7 +104,7 @@ class UserController extends Controller
         $user = UserModel::find($request->id);
         if (!$user) {
             return response()->json([
-                
+
                 "mensaje" => "Usuario no encontrado",
                 "status" => 404
             ], 404);
@@ -107,7 +113,10 @@ class UserController extends Controller
         // Validar datos
         $validator = Validator::make($request->all(), [
             "name" => "required|min:2",
-            "password" => "required|min:5"
+            "password" => "",
+            "email" => "email|unique:user,email",
+            "foto" => "nullable",
+            "design_id" => "nullable",
         ]);
 
         if ($validator->fails()) {
@@ -121,6 +130,9 @@ class UserController extends Controller
         // Actualizar datos
         $user->name = $request->name;
         $user->password = Hash::make($request->password); // hash de contraseña
+        $user->email = $request->email;
+        $user->foto = $request->foto;
+        $user->design_id = $request->design_id;
         $user->save();
 
         return response()->json([
