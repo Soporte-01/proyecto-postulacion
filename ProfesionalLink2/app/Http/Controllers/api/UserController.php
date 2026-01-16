@@ -39,7 +39,7 @@ class UserController extends Controller
     }
     public function register(Request $request){
         $validator= validator::make($request->all(), [
-            "name"=> "required|min:2",
+            "name"=> "required|min:2|unique:user,name",
             "password"=> "required",
             "email"=> "required|email|unique:user,email",
             "foto"=> "nullable|max:2048",
@@ -69,7 +69,7 @@ class UserController extends Controller
             }
             $data=[
                 "user"=>$user,
-                "status"=>200
+                "status"=>201
                 ];
             return response()->json($data,201);
 

@@ -1,35 +1,47 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue'
+import axios from 'axios'
 
-const props = defineProps({
-  usuarios: Array,      // Array de usuarios
-  usuario: String,      // Input del usuario desde padre
+const props = defineProps({   
+  usuario: String, 
+  email: String,      // Input del email desde padre
   password: String      // Input de la contraseña desde padre
 })
 
-console.log(props.usuario)
-console.log(props.password)
 
 const emit = defineEmits(['crear-usuario'])
 
 // Función para manejar registro
-const manejarRegistro = () => {
-  if (!props.usuario || !props.password) {
-    alert('Completa todos los campos')
-    return
-  }
+async function manejarRegistro () {
+  try {
+    const respuesta = await axios.post('http://localhost:8080/api/usuarios',
+      {
+        name: props.usuario,
+        password: props.password,
+        email: props.email
+      }
+    )
 
-  // Buscar duplicado (ignora mayúsculas)
-  const usuarioExistente = props.usuarios.find(
-    u => u.usuario.toLowerCase() === props.usuario.toLowerCase()
-  )
+    alert(respuesta.data.message || 'Usuario creado correctamente')
 
-  if (usuarioExistente) {
-    alert(`El usuario "${props.usuario}" ya existe`)
+    // opcional: notificar al padre
+    emit('crear-usuario', respuesta.data.user)
+
+  } catch (error) {
+  if (error.respuesta) {
+    if (error.respuesta.status === 422) {
+      const errors = error.respuesta.data.errors
+      if (errors?.email) {
+        alert('El email ya está registrado')
+        return
+      }
+    }
+
+    alert(error.respuesta.data.message || 'Error al registrar')
   } else {
-    // Emitir al padre para que agregue el usuario
-    emit('crear-usuario', props.usuario, props.password)
+    alert('Error de conexión')
   }
+}
 }
 </script>
 

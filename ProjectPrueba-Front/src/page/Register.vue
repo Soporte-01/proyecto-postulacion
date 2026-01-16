@@ -2,15 +2,17 @@
 import data from '../Validador.json'
 import BotomRegistro from '../components/BotomRegistro.vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const usuarios = ref(data);
+const router = useRouter();
 const mostrar = ref(false);
 const usuarioInput = ref('');
+const emailInput = ref('');
 const password = ref('');
 const passwordconfic = ref('');
 
 function agregarUsuario(){
-
+router.push('/login')
 }
 </script>
 
@@ -19,7 +21,10 @@ function agregarUsuario(){
     <h2>Registro</h2>
 
     <label>Usuario</label>
-    <input type="text" v-model="usuarioInput" />
+    <input type="text" required v-model="usuarioInput" />
+
+    <label>Email</label>
+    <input type="email" required v-model="emailInput" />
 
     <label>Contraseña</label>
 
@@ -43,8 +48,8 @@ function agregarUsuario(){
       <label for="mostrar">Mostrar Contraseña</label>
     </div>
     <BotomRegistro :disabled="password != passwordconfic || password == ''"
-    :usuarios="usuarios"
     :usuario="usuarioInput"
+    :email="emailInput"
     :password="password"
     @crear-usuario="agregarUsuario"
     ></BotomRegistro>

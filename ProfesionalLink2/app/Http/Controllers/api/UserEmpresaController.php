@@ -21,6 +21,21 @@ class UserEmpresaController extends Controller
         };
         return response()->json($userempresas,200);
     }
+    public function getByUserId($user_id){
+        $userEmpresa = UserEmpresaModel::where('user_id', $user_id)->first();
+
+        if (!$userEmpresa) {
+            return response()->json([
+                'tieneEmpresa' => false,
+                'message' => 'El usuario no tiene empresa asociada'
+            ], 200);
+        }
+
+        return response()->json([
+            'tieneEmpresa' => true,
+            'empresa' => $userEmpresa
+        ], 200);
+    }
     public function get($id){
         $userempresa = UserEmpresaModel::find($id);
 
