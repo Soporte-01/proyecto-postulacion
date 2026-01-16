@@ -36,6 +36,16 @@ class UserEmpresaController extends Controller
             'empresa' => $userEmpresa
         ], 200);
     }
+    public function getAllUserId($user_id){
+        $userEmpresa = UserEmpresaModel::where('empresa_id', $user_id)->first();    
+        if (!$userEmpresa) {
+            return response()->json([]);
+        };
+        return response()->json([
+            'Users'=>$userEmpresa
+        ]
+             ,200);
+    }
     public function get($id){
         $userempresa = UserEmpresaModel::find($id);
 

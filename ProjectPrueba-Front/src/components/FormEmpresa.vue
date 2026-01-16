@@ -1,7 +1,7 @@
 <script  setup>
     import { ref, onMounted } from 'vue'
     import axios from 'axios'
-    import BotomRegisterEmpresa from './botomRegisterEmpresa.vue'
+    import BotomRegisterEmpresa from './BotomRegisterEmpresa.vue'
 
     const mostrarFormulario = ref(false)
     const cargando = ref(true)
@@ -26,13 +26,10 @@
 
     try {
         const response = await axios.get(
-        `http://127.0.0.1:8000/api/userEmpresa/usebyempresa/${usuario_id}`
+        `http://127.0.0.1:8000/api/userEmpresa/idbyempresa/${usuario_id}`
         )
 
-        // backend devuelve: { tieneEmpresa: true/false }
         mostrarFormulario.value = !response.data.tieneEmpresa
-        // console.log('Respuesta de la verificación:', response.data)
-        // console.log('Respuesta de la verificación:', response.data.empresa.empresa_id)
         localStorage.setItem('id_empresa', response.data.empresa.empresa_id)
     } catch (error) {
         console.error('Error al verificar empresa:', error)

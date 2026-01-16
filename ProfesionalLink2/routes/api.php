@@ -28,7 +28,8 @@ Route::patch('/design/{id}', [DesignController::class,'update']);
 Route::delete('/design/{id}', [DesignController::class,'delete']);
 
 Route::get('/userEmpresa', [UserEmpresaController::class,'getAll']);
-Route::get('/userEmpresa/usebyempresa/{id}', [UserEmpresaController::class,'getByUserId']);
+Route::get('/userEmpresa/idbyuser/{id}', [UserEmpresaController::class,'getAllUserId']);
+Route::get('/userEmpresa/idbyempresa/{id}', [UserEmpresaController::class,'getAllUserId']);
 Route::get('/userEmpresa/{id}', [UserEmpresaController::class,'get']);
 Route::post('/userEmpresa', [UserEmpresaController::class,'create']);
 Route::delete('/userEmpresa/{id}', [UserEmpresaController::class,'delete']);

@@ -7,6 +7,7 @@ const logout = () => {
   localStorage.removeItem('auth')
   localStorage.removeItem('usuario')
   localStorage.removeItem('id')
+  localStorage.removeItem('id_empresa')
   router.push('/login')
 }
 </script>

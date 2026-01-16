@@ -1,4 +1,5 @@
 <script setup>
+    
 
 </script>
 <template>
@@ -38,22 +39,27 @@
     z-index: -2;
     margin: 5%;
    }
+   .img-logo-empresa{
+    height: 8rem;
+    width: auto;
+   }
    .content-img{
+    padding: 25px;
     display: flex;
-    justify-content: space-around;
    }
    .card-content{
     background-color: white;
     position: relative;
     display: grid;
+    height: 53vh;
     width: 20vw;
     border-radius: 5%;
-    grid-template-rows: 50% auto;
+    grid-template-rows: 16rem auto;
     overflow: hidden;
    }
    section{
     position: relative;
-    align-content: flex-start;
+    align-content: start;
     background-color: blueviolet;
     z-index: 1;
     display: grid;
@@ -72,7 +78,7 @@
     }
     .label-puesto{
         color: rgb(221, 221, 221);
-        font-size: 20px;
+        font-size: 25px;
     }
     .content-icon{
         display: flex;
@@ -83,6 +89,18 @@
     .bi{
         height: 2rem;
         color: white;
+    }
+    .bi:hover{
+        transform: scale(1.5);
+    }
+    .bi-facebook:hover{
+        color: #5454ff ;
+    }
+    .bi-whatsapp:hover{
+        color: #00bb2d;
+    }
+    .bi-linkedin:hover{
+        color: #1897ff;
     }
    }
 </style>

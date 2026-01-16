@@ -15,7 +15,7 @@ const routes = [
   { path: '/home', component: Home,meta: { requiresAuth: true } },
   { path: '/show', component: Show,meta: { requiresAuth: true } },
   { path: '/edit', component: EditCard,meta: { requiresAuth: true } },
-  { path: '/card', component: Card}
+
 
 ]
 

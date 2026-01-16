@@ -1,6 +1,7 @@
 <script setup>
 import Navbar from '../components/Navbar.vue'
 import FormEmpresa from '../components/FormEmpresa.vue';
+import Galery from '../components/Galery.vue';
 
 </script>
 
@@ -9,7 +10,7 @@ import FormEmpresa from '../components/FormEmpresa.vue';
         <Navbar></Navbar>
         <div class="content">
           <FormEmpresa></FormEmpresa>
-          
+          <Galery></Galery>
         </div>
     </div>
 </template>
