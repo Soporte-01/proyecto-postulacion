@@ -5,6 +5,7 @@ import Home from '../page/Home.vue'
 // import Bienvenida from '../page/Bienvenida.vue'
 import Show from '../page/Show.vue'
 import EditCard from '../page/EditCard.vue'
+import Card from '../components/card.vue'
   
 const routes = [
   { path: '/', component: Login },
@@ -13,7 +14,9 @@ const routes = [
   // { path: '/bienvenida',component: Bienvenida,meta: { requiresAuth: true }},
   { path: '/home', component: Home,meta: { requiresAuth: true } },
   { path: '/show', component: Show,meta: { requiresAuth: true } },
-  { path: '/edit', component: EditCard,meta: { requiresAuth: true } }
+  { path: '/edit', component: EditCard,meta: { requiresAuth: true } },
+  { path: '/card', component: Card}
+
 ]
 
 const router = createRouter({

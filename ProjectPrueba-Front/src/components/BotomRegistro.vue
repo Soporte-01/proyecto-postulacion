@@ -14,7 +14,7 @@ const emit = defineEmits(['crear-usuario'])
 // Función para manejar registro
 async function manejarRegistro () {
   try {
-    const respuesta = await axios.post('http://localhost:8080/api/usuarios',
+    const respuesta = await axios.post('http://127.0.0.1:8000/api/user',
       {
         name: props.usuario,
         password: props.password,

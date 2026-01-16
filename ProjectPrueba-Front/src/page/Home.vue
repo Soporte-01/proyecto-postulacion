@@ -9,6 +9,7 @@ import FormEmpresa from '../components/FormEmpresa.vue';
         <Navbar></Navbar>
         <div class="content">
           <FormEmpresa></FormEmpresa>
+          
         </div>
     </div>
 </template>

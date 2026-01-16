@@ -1,5 +1,4 @@
 <script setup>
-import data from '../Validador.json'
 import BotomRegistro from '../components/BotomRegistro.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -53,6 +52,7 @@ router.push('/login')
     :password="password"
     @crear-usuario="agregarUsuario"
     ></BotomRegistro>
+    <button>Google</button>
     <a href="./Login">Login</a>
   </form>
 </template>
